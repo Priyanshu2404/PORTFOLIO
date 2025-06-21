@@ -2,11 +2,7 @@
 
 Welcome to my personal portfolio website. This is a responsive and modern web portfolio built using React and Tailwind CSS, designed to showcase my skills, projects, and contact information.
 
-## Live Demo
-
-View the site: [https://priyanshu2404.github.io/PORTFOLIO/](https://priyanshu2404.github.io/PORTFOLIO/)  
 Hosted with GitHub Pages
-
 ---
 
 ## Features
