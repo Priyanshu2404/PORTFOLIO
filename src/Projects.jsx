@@ -4,19 +4,31 @@ const projects = [
         title: "Portfolio Website",
         description: "Responsive portfolio built with React & Tailwind.",
         image: "/projects/portfolio.png",
+<<<<<<< HEAD
         github: "https://github.com/Priyanshu2404/PORTFOLIO",
+=======
+        github: "https://github.com/your-username/portfolio",
+>>>>>>> e480439fced537e93e93d6982392b33ecccc5b92
     },
     {
         title: "Interactive Constellation weaver",
         description: "Get full-proof information about various constellations and perform operations on it",
         image: "/projects/constellation.png",
+<<<<<<< HEAD
         github: "https://github.com/Priyanshu2404/constellation-weaver",
+=======
+        github: "https://github.com/your-username/weather-app",
+>>>>>>> e480439fced537e93e93d6982392b33ecccc5b92
     },
     {
         title: "Hand Cricket Game",
         description: "2 players playing interface made with HTML,CSS and JavaScript",
         image: "/projects/handcricket.png",
+<<<<<<< HEAD
         github: "https://github.com/Priyanshu2404/HAND-CRICKET",
+=======
+        github: "https://github.com/your-username/ecommerce-app",
+>>>>>>> e480439fced537e93e93d6982392b33ecccc5b92
     },
 ];
 
