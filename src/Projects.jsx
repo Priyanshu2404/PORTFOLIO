@@ -24,9 +24,14 @@ const projects = [
     },
 ];
 
-export default function Projects() {
+// 1. Accept darkMode as a prop
+export default function Projects({ darkMode }) {
     return (
-        <section id="projects" className="bg-[#0F1116] text-white py-20 px-6 min-h-screen">
+        <section
+            id="projects"
+            className={`py-20 px-6 min-h-screen transition-colors duration-500
+                ${darkMode ? 'bg-slate-950 text-white' : 'bg-gray-50 text-gray-900'}`}
+        >
             <div className="max-w-6xl mx-auto text-center">
                 <h2 className="from-pink-500 via-purple-500 to-blue-500 bg-gradient-to-r bg-clip-text font-bold text-4xl text-transparent">
                     PROJECTS
@@ -41,25 +46,32 @@ export default function Projects() {
                             rel="noopener noreferrer"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.2 }}
-                            className="relative group overflow-hidden rounded-2xl shadow-lg border border-gray-700 bg-[#1A1D29]/70 backdrop-blur-md cursor-pointer hover:scale-[1.03] hover:shadow-pink-500/30 transition-transform"
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                            // 2. Dynamic card styling for Glassmorphism
+                            className={`relative group overflow-hidden rounded-2xl shadow-lg border transition-all duration-300 cursor-pointer hover:scale-[1.03]
+                                ${darkMode
+                                    ? 'bg-slate-900/70 border-gray-700 backdrop-blur-md hover:shadow-pink-500/30'
+                                    : 'bg-white/80 border-gray-200 backdrop-blur-md hover:shadow-xl'}`}
                         >
                             <img
                                 src={project.image}
                                 alt={project.title}
                                 className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
                             />
-                            <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
-                                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+
+                            {/* Overlay stays dark for high contrast in both modes */}
+                            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+                                <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
                                 <p className="text-sm text-gray-300 mb-4">{project.description}</p>
+
                                 <div className="flex flex-wrap gap-2 mb-3">
                                     {project.tech.map((tech, i) => (
-                                        <span key={i} className="text-xs bg-pink-500/20 text-pink-400 px-2 py-1 rounded-full">
+                                        <span key={i} className="text-xs bg-pink-500/20 text-pink-400 px-2 py-1 rounded-full border border-pink-500/30">
                                             {tech}
                                         </span>
                                     ))}
                                 </div>
-                                <p className="text-sm text-blue-400 font-semibold">View on GitHub ↗</p>
+                                <p className="text-sm text-blue-400 font-semibold group-hover:underline">View on GitHub ↗</p>
                             </div>
                         </motion.a>
                     ))}

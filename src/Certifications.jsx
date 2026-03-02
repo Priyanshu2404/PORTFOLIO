@@ -28,11 +28,14 @@ const Certifications = [
     },
 ];
 
-export default function CertificationsSection() {
+// 1. Pass darkMode as a prop
+export default function CertificationsSection({ darkMode }) {
     return (
         <motion.section
             id="certifications"
-            className="bg-[#0F1116] text-white py-20 px-6 flex justify-center items-center min-h-screen"
+            // 2. Updated: Removed bg-[#0F1116] for dynamic theme classes
+            className={`py-20 px-6 flex justify-center items-center min-h-screen transition-colors duration-500 
+                ${darkMode ? 'bg-slate-950 text-white' : 'bg-gray-50 text-gray-900'}`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -55,27 +58,37 @@ export default function CertificationsSection() {
                     {Certifications.map((cert, index) => (
                         <motion.div
                             key={index}
-                            className="p-6 mt-6 bg-[#1A1D29] rounded-2xl shadow-lg border border-gray-800 hover:shadow-pink-500/40 transition-transform duration-300 group"
+                            // 3. Updated: Removed bg-[#1A1D29] for dynamic card colors
+                            className={`p-6 mt-6 rounded-2xl shadow-lg border transition-all duration-300 group
+                                ${darkMode
+                                    ? 'bg-slate-900 border-gray-800 hover:shadow-pink-500/20'
+                                    : 'bg-white border-gray-200 hover:shadow-xl'}`}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.6, delay: index * 0.2 }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
                             viewport={{ once: true }}
                         >
-                            <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-pink-400 transition-colors">
+                            <h3 className={`text-xl font-semibold mb-2 group-hover:text-pink-500 transition-colors
+                                ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 {cert.title}
                             </h3>
-                            <p className="text-sm text-red-400">Issued by: {cert.issuer}</p>
-                            <p className="text-sm text-green-300">Date: {cert.date}</p>
+                            <p className="text-sm text-red-500 font-medium">Issued by: {cert.issuer}</p>
+                            <p className={`text-sm font-medium ${darkMode ? 'text-green-300' : 'text-green-600'}`}>
+                                Date: {cert.date}
+                            </p>
+
                             {cert.certificateid && (
-                                <p className="text-sm text-gray-400">
+                                <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                     ID: <span className="font-mono">{cert.certificateid}</span>
                                 </p>
                             )}
+
                             <a
                                 href={cert.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-block mt-4 text-blue-400 hover:text-blue-500 font-medium transition-colors"
+                                className={`inline-block mt-4 font-medium transition-colors
+                                    ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-800'}`}
                             >
                                 View Certificate →
                             </a>

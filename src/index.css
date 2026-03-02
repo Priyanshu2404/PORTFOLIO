@@ -8,3 +8,9 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Use @layer base to safely extend the body styles */
+@layer base {
+    body {
+        @apply transition-colors duration-500 ease-in-out;
+    }
+}
