@@ -23,15 +23,14 @@ const projects = [
         tech: ["HTML", "CSS", "JavaScript"],
     },
     {
-        title:"AI Stock Market Forecaster",
-        description:"a hybrid deep learning framework mixing technical indicators with news sentiment analysis to predict stock trends.",
-        image:"projects/minorproject.png",
-        tech: ["Python","TensorFlow","LSTM","FinBERT","yfinance"],
-        code:"https://colab.research.google.com/drive/1OGJT0emTYXtReVqbzS4kYc7ZWgKy5wFl#scrollTo=pjgGwiTEsE2K",
+        title: "Forecasting Financial Futures: A LSTM Framework for Stock Market Prediction",
+        description: "A hybrid deep learning framework mixing technical indicators with news sentiment analysis to predict stock trends.",
+        image: "projects/minorproject.png",
+        tech: ["Python", "TensorFlow", "LSTM", "FinBERT", "yfinance"],
+        code: "https://colab.research.google.com/drive/1OGJT0emTYXtReVqbzS4kYc7ZWgKy5wFl#scrollTo=pjgGwiTEsE2K",
     }
 ];
 
-// 1. Accept darkMode as a prop
 export default function Projects({ darkMode }) {
     return (
         <section
@@ -48,13 +47,13 @@ export default function Projects({ darkMode }) {
                     {projects.map((project, index) => (
                         <motion.a
                             key={index}
-                            href={project.github}
+                            // Logic: Use project.code if it exists, otherwise use project.github
+                            href={project.code || project.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
-                            // 2. Dynamic card styling for Glassmorphism
                             className={`relative group overflow-hidden rounded-2xl shadow-lg border transition-all duration-300 cursor-pointer hover:scale-[1.03]
                                 ${darkMode
                                     ? 'bg-slate-900/70 border-gray-700 backdrop-blur-md hover:shadow-pink-500/30'
@@ -66,7 +65,6 @@ export default function Projects({ darkMode }) {
                                 className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
                             />
 
-                            {/* Overlay stays dark for high contrast in both modes */}
                             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
                                 <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
                                 <p className="text-sm text-gray-300 mb-4">{project.description}</p>
@@ -78,7 +76,11 @@ export default function Projects({ darkMode }) {
                                         </span>
                                     ))}
                                 </div>
-                                <p className="text-sm text-blue-400 font-semibold group-hover:underline">View on GitHub ↗</p>
+
+                                {/* Dynamic Link Text */}
+                                <p className="text-sm text-blue-400 font-semibold group-hover:underline">
+                                    {project.code ? "View on Google Colab ↗" : "View on GitHub ↗"}
+                                </p>
                             </div>
                         </motion.a>
                     ))}
