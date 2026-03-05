@@ -22,6 +22,13 @@ const projects = [
         github: "https://github.com/Priyanshu2404/HAND-CRICKET",
         tech: ["HTML", "CSS", "JavaScript"],
     },
+    {
+        title:"AI Stock Market Forecaster",
+        description:"a hybrid deep learning framework mixing technical indicators with news sentiment analysis to predict stock trends.",
+        image:"projects/minorproject.png",
+        tech: ["Python","TensorFlow","LSTM","FinBERT","yfinance"],
+        code:"https://colab.research.google.com/drive/1OGJT0emTYXtReVqbzS4kYc7ZWgKy5wFl#scrollTo=pjgGwiTEsE2K",
+    }
 ];
 
 // 1. Accept darkMode as a prop

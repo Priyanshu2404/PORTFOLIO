@@ -8,13 +8,13 @@ const Dock = ({ darkMode, setDarkMode }) => {
         { icon: <Home size={20} />, label: "Home", href: "#" },
         { icon: <FolderCode size={20} />, label: "Projects", href: "#projects" },
         { icon: <Github size={20} />, label: "GitHub", href: "https://github.com/Priyanshu2404" },
-        { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://linkedin.com/in/priyanshu-mishra24O4" },
+        { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://www.linkedin.com/in/priyanshu-mishra2404/" },
         { icon: <MessageCircle size={20} />, label: "WhatsApp", href: "https://wa.me/919625769191" },
         { icon: <Instagram size={20} />, label: "Instagram", href: "https://instagram.com/beingpriyanshu24" },
         { 
             // Switches icon based on current theme
-            icon: darkMode ? <Sun size={20} /> : <Moon size={20} />, 
-            label: "Theme", 
+            icon: darkMode ? <Sun size={20} /> : <Moon size={20} />,
+            label: "Theme",
             isAction: true // Mark this as an action button, not a link
         },
     ];
