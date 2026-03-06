@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import About from './About';
+import AIChatbot from './AIChatbot';
 import "./App.css";
 import Certifications from './Certifications';
 import Contact from './Contact';
@@ -9,8 +10,6 @@ import Header from './Header';
 import Projects from './Projects';
 import Resume from './Resume';
 import Skills from './Skills';
-// 1. Import the new AIChatbot component
-import AIChatbot from './AIChatbot';
 
 const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
