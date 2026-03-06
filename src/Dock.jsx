@@ -12,7 +12,7 @@ const Dock = ({ darkMode, setDarkMode }) => {
         { icon: <Github size={20} />, label: "GitHub", href: "https://github.com/Priyanshu2404" },
         { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://www.linkedin.com/in/priyanshu-mishra2404/" },
         {
-            icon: <Bot size={20} />,
+            icon: <Bot size={20} className='text-pink-600'/>,
             label: "AI Assistant",
             isAction: true,
             actionType: "chat"
