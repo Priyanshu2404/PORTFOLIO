@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import About from './About';
-import AIChatbot from './AIChatbot';
 import "./App.css";
 import Certifications from './Certifications';
 import Contact from './Contact';
@@ -35,9 +34,7 @@ const Portfolio = () => {
       <Contact darkMode={darkMode} />
       <Footer darkMode={darkMode} />
 
-      {/* 2. Add the AIChatbot here (placed before Dock so it layers correctly) */}
-      <AIChatbot darkMode={darkMode} />
-
+      {/* AIChatbot yahan se hata diya hai kyunki wo Dock ke andar render hoga */}
       <Dock darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   );
