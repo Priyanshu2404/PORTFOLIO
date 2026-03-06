@@ -33,8 +33,6 @@ const Portfolio = () => {
       <Skills darkMode={darkMode} />
       <Contact darkMode={darkMode} />
       <Footer darkMode={darkMode} />
-
-      {/* AIChatbot yahan se hata diya hai kyunki wo Dock ke andar render hoga */}
       <Dock darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   );
