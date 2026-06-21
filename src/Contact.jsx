@@ -10,7 +10,7 @@ import { SiX } from 'react-icons/si';
 //   2. Enter priyanshumishra2404@gmail.com
 //   3. Check your inbox for the access key
 //   4. Paste it below (replace YOUR_ACCESS_KEY_HERE)
-const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+const WEB3FORMS_KEY = 'b920f505-e531-4b44-b3a1-46c8cfba0dc8';
 
 const SOCIAL_LINKS = [
   { Icon: FaLinkedin,  label: 'LinkedIn',  color: '#0A66C2', href: 'https://www.linkedin.com/in/priyanshu-mishra2404/' },
