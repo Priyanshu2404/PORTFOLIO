@@ -2,139 +2,235 @@ import emailjs from '@emailjs/browser';
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { FaInstagram, FaLinkedin, FaTelegram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp } from 'react-icons/fa';
+import { SiX } from 'react-icons/si';
 
-// 1. Accept darkMode as a prop
-export default function Contact({ darkMode }) {
-    const form = useRef();
+const SOCIAL_LINKS = [
+  { Icon: FaLinkedin,  label: 'LinkedIn',  color: '#0A66C2', href: 'https://www.linkedin.com/in/priyanshu-mishra2404/' },
+  { Icon: SiX,        label: 'X',         color: '#e8e8e8', href: 'https://x.com/Priyanshuuu2404' },
+  { Icon: FaWhatsapp, label: 'WhatsApp',  color: '#25D366', href: 'https://wa.me/+919625769191' },
+  { Icon: FaInstagram,label: 'Instagram', color: '#E1306C', href: 'https://www.instagram.com/_priyanshuuu24' },
+  { Icon: FaTelegram, label: 'Telegram',  color: '#26A5E4', href: 'https://t.me/Priyanshu2404PM' },
+];
 
-    const sendemail = (e) => {
-        e.preventDefault();
+const fieldVariants = {
+  hidden:  { opacity: 0, x: -8 },
+  visible: (i) => ({
+    opacity: 1, x: 0,
+    transition: { duration: 0.15, ease: 'linear', delay: i * 0.07 },
+  }),
+};
 
-        emailjs.sendForm(
-            'service_x3l4lsd',
-            'template_cyu87jr',
-            form.current,
-            'J8yY0EbMs6lo4CP73'
-        )
-            .then(
-                () => {
-                    toast.success("Message sent successfully! 🚀");
-                    form.current.reset();
-                },
-                (error) => {
-                    toast.error("Message failed to send ❌");
-                    console.error(error.text);
-                }
-            );
-    }
+export default function Contact() {
+  const form = useRef();
 
-    return (
-        // 2. Dynamic background and text colors
-        <section
-            id="contact"
-            className={`py-20 px-6 flex justify-center items-center min-h-screen transition-colors duration-500
-                ${darkMode ? 'bg-slate-950 text-white' : 'bg-gray-50 text-gray-900'}`}
-        >
-            <Toaster position="top-center" reverseOrder={false} />
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-16 text-center"
-            >
-                {/* Left Side */}
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="space-y-6"
-                >
-                    <h2 className="text-2xl font-bold text-pink-500">
-                        DO YOU HAVE ANY IDEA TO TALK UPON ??
-                    </h2>
-                    <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                        GET IN TOUCH
-                    </h3>
-
-                    <div className="mt-8">
-                        <h4 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-700'}`}>CONTACT</h4>
-                        <a href="mailto:priyanshumishra2404@gmail.com"
-                            className="text-blue-500 hover:underline font-medium">
-                            priyanshumishra2404@gmail.com
-                        </a>
-                    </div>
-
-                    <div className="mt-6">
-                        <h4 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-700'}`}>SOCIAL MEDIA</h4>
-                        <div className="flex justify-center space-x-6 mt-4 text-2xl">
-                            {[
-                                { Icon: FaLinkedin, link: "https://www.linkedin.com/in/priyanshu-mishra2404/", color: darkMode ? "hover:text-blue-600" : "text-blue-700 hover:text-blue-900" },
-                                { Icon: FaTwitter, link: "https://x.com/Priyanshuuu2404", color: darkMode ? "hover:text-blue-400" : "text-blue-400 hover:text-blue-600" },
-                                { Icon: FaWhatsapp, link: "https://wa.me/+919625769191", color: darkMode ? "hover:text-green-400" : "text-green-600 hover:text-green-800" },
-                                { Icon: FaInstagram, link: "https://www.instagram.com/_priyanshuuu24", color: darkMode ? "hover:text-pink-400" : "text-pink-600 hover:text-pink-800" },
-                                { Icon: FaTelegram, link: "https://t.me/Priyanshu2404PM", color: darkMode ? "hover:text-blue-200" : "text-sky-600 hover:text-sky-800" }
-                            ].map(({ Icon, link, color }, i) => (
-                                <motion.a
-                                    key={i}
-                                    href={link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileHover={{ scale: 1.2 }}
-                                    className={`${color} transition-all duration-300`}
-                                >
-                                    <Icon />
-                                </motion.a>
-                            ))}
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Right Side - Contact Form */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="space-y-6"
-                >
-                    <h4 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-700'}`}>CONTACT FORM</h4>
-                    <form ref={form} onSubmit={sendemail} className="space-y-4">
-                        {["user_name", "user_email"].map((field, i) => (
-                            <motion.input
-                                key={i}
-                                type={field === "user_email" ? "email" : "text"}
-                                name={field}
-                                placeholder={field === "user_email" ? "Email" : "Name"}
-                                required
-                                whileFocus={{ scale: 1.02 }}
-                                // 3. Dynamic input styling for borders and text
-                                className={`w-full p-3 rounded-md bg-transparent border transition focus:outline-none focus:border-pink-500
-                                    ${darkMode
-                                        ? 'border-gray-700 text-white placeholder-gray-500'
-                                        : 'border-gray-300 text-gray-900 placeholder-gray-400'}`}
-                            />
-                        ))}
-                        <motion.textarea
-                            name="message"
-                            placeholder="Message"
-                            rows="4"
-                            required
-                            whileFocus={{ scale: 1.02 }}
-                            className={`w-full p-3 rounded-md bg-transparent border transition focus:outline-none focus:border-pink-500
-                                ${darkMode
-                                    ? 'border-gray-700 text-white placeholder-gray-500'
-                                    : 'border-gray-300 text-gray-900 placeholder-gray-400'}`}
-                        />
-                        <motion.button
-                            type="submit"
-                            whileHover={{ scale: 1.05 }}
-                            className="px-6 py-3 mt-2 rounded-md bg-gradient-to-r from-sky-500 to-pink-500 text-white font-semibold transition-all shadow-lg shadow-pink-500/40"
-                        >
-                            SEND
-                        </motion.button>
-                    </form>
-                </motion.div>
-            </motion.div>
-        </section>
+  const sendemail = (e) => {
+    e.preventDefault();
+    emailjs.sendForm(
+      'service_x3l4lsd',
+      'template_cyu87jr',
+      form.current,
+      'J8yY0EbMs6lo4CP73'
+    ).then(
+      () => {
+        toast.success('TRANSMISSION SUCCESSFUL ✓', {
+          style: {
+            background: '#0d0d0d',
+            color: '#00ff41',
+            border: '1px solid #1f1f1f',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.75rem',
+            borderRadius: '0px',
+          },
+        });
+        form.current.reset();
+      },
+      (error) => {
+        toast.error('TRANSMISSION FAILED ✗', {
+          style: {
+            background: '#0d0d0d',
+            color: '#ff3333',
+            border: '1px solid #1f1f1f',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.75rem',
+            borderRadius: '0px',
+          },
+        });
+        console.error(error.text);
+      }
     );
+  };
+
+  return (
+    <section
+      id="contact"
+      className="py-24 px-6 min-h-screen bg-terminal-surface"
+    >
+      <Toaster position="top-center" reverseOrder={false} />
+
+      <div className="max-w-5xl mx-auto space-y-8">
+
+        {/* Section header */}
+        <div className="space-y-1">
+          <div className="text-xs2 text-smoke-400 tracking-widest uppercase">[06] SECURE_TRANSMISSION.INIT</div>
+          <h2 className="text-terminal-2xl font-mono font-bold text-smoke-100 tracking-wide">
+            CONTACT
+          </h2>
+          <div className="terminal-hr w-full mt-2" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+          {/* LEFT — status info */}
+          <motion.div
+            initial={{ opacity: 0, x: -8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.2, ease: 'linear' }}
+            className="space-y-8"
+          >
+            {/* Info block */}
+            <div className="border border-terminal-border bg-terminal-panel p-5 space-y-4 font-mono text-terminal-sm">
+              <div className="text-xs2 text-smoke-400 uppercase tracking-widest border-b border-terminal-border pb-2">
+                RELAY_ENDPOINT
+              </div>
+              <div>
+                <div className="text-smoke-400 text-xs2 uppercase tracking-wider mb-1">EMAIL</div>
+                <a
+                  href="mailto:priyanshumishra2404@gmail.com"
+                  className="text-phosphor hover:text-glow transition-colors duration-fast"
+                >
+                  priyanshumishra2404@gmail.com
+                </a>
+              </div>
+              <div>
+                <div className="text-smoke-400 text-xs2 uppercase tracking-wider mb-3">SOCIAL CHANNELS</div>
+                <div className="flex gap-2 flex-wrap">
+                  {SOCIAL_LINKS.map(({ Icon, label, color, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={label}
+                      className="group flex items-center justify-center w-9 h-9 border border-terminal-border text-smoke-400
+                        hover:border-opacity-80 transition-all duration-fast"
+                      style={{ '--brand': color }}
+                    >
+                      <Icon
+                        size={16}
+                        className="transition-all duration-fast group-hover:scale-110"
+                        style={{ color: 'currentColor' }}
+                        onMouseEnter={e => e.currentTarget.style.color = color}
+                        onMouseLeave={e => e.currentTarget.style.color = ''}
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* System status */}
+            <div className="space-y-2 font-mono text-xs2 text-smoke-400">
+              <div className="flex items-center gap-2">
+                <span className="text-sys-ok">●</span>
+                <span>SECURE_CHANNEL: ACTIVE</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sys-ok">●</span>
+                <span>ENCRYPTION: EMAILJS/TLS</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sys-warn">●</span>
+                <span>RESPONSE_TIME: 24–48H</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* RIGHT — form */}
+          <div className="border border-terminal-border bg-terminal-surface">
+            {/* Chrome */}
+            <div className="flex items-center justify-between px-4 py-2 border-b border-terminal-border bg-terminal-panel">
+              <span className="text-xs2 text-smoke-400 uppercase tracking-widest">transmit_message.sh</span>
+              <span className="text-xs2 text-sys-ok animate-flicker">● LIVE</span>
+            </div>
+
+            <form ref={form} onSubmit={sendemail} className="p-5 space-y-4 font-mono text-terminal-sm">
+              {/* OPERATOR_ID */}
+              <motion.div
+                custom={0} variants={fieldVariants} initial="hidden"
+                whileInView="visible" viewport={{ once: true }}
+                className="space-y-1"
+              >
+                <label className="text-xs2 text-smoke-400 uppercase tracking-wider">OPERATOR_ID</label>
+                <div className="flex items-center border border-terminal-border hover:border-smoke-400 focus-within:border-phosphor transition-colors duration-fast">
+                  <span className="text-phosphor px-3 select-none">&gt;</span>
+                  <input
+                    type="text"
+                    name="user_name"
+                    placeholder="YOUR NAME"
+                    required
+                    className="flex-1 bg-transparent text-smoke-100 py-2.5 pr-3 placeholder-smoke-400 caret-phosphor text-terminal-sm"
+                  />
+                </div>
+              </motion.div>
+
+              {/* RELAY_ADDR */}
+              <motion.div
+                custom={1} variants={fieldVariants} initial="hidden"
+                whileInView="visible" viewport={{ once: true }}
+                className="space-y-1"
+              >
+                <label className="text-xs2 text-smoke-400 uppercase tracking-wider">RELAY_ADDR</label>
+                <div className="flex items-center border border-terminal-border hover:border-smoke-400 focus-within:border-phosphor transition-colors duration-fast">
+                  <span className="text-phosphor px-3 select-none">&gt;</span>
+                  <input
+                    type="email"
+                    name="user_email"
+                    placeholder="YOUR EMAIL"
+                    required
+                    className="flex-1 bg-transparent text-smoke-100 py-2.5 pr-3 placeholder-smoke-400 caret-phosphor text-terminal-sm"
+                  />
+                </div>
+              </motion.div>
+
+              {/* PAYLOAD */}
+              <motion.div
+                custom={2} variants={fieldVariants} initial="hidden"
+                whileInView="visible" viewport={{ once: true }}
+                className="space-y-1"
+              >
+                <label className="text-xs2 text-smoke-400 uppercase tracking-wider">PAYLOAD</label>
+                <div className="flex border border-terminal-border hover:border-smoke-400 focus-within:border-phosphor transition-colors duration-fast">
+                  <span className="text-phosphor px-3 pt-2.5 select-none self-start">&gt;</span>
+                  <textarea
+                    name="message"
+                    placeholder="YOUR MESSAGE"
+                    rows="5"
+                    required
+                    className="flex-1 bg-transparent text-smoke-100 py-2.5 pr-3 placeholder-smoke-400 caret-phosphor text-terminal-sm resize-none"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Submit */}
+              <motion.div
+                custom={3} variants={fieldVariants} initial="hidden"
+                whileInView="visible" viewport={{ once: true }}
+              >
+                <button
+                  type="submit"
+                  className="w-full font-mono text-sm py-3 border border-phosphor text-phosphor hover:bg-phosphor hover:text-terminal-black transition-colors duration-fast tracking-widest uppercase shadow-phosphor-sm"
+                >
+                  [ TRANSMIT ]
+                </button>
+              </motion.div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
 }

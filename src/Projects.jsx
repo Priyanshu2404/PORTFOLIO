@@ -1,91 +1,139 @@
 import { motion } from "framer-motion";
 
 const projects = [
-    {
-        title: "Portfolio Website",
-        description: "Responsive portfolio built with React & Tailwind.",
-        image: "projects/portfolio.png",
-        github: "https://github.com/Priyanshu2404/PORTFOLIO",
-        tech: ["React", "Tailwind", "Vite"],
-    },
-    {
-        title: "Interactive Constellation Weaver",
-        description: "Explore constellations, create stories, and interact with star maps.",
-        image: "projects/constellation.png",
-        github: "https://github.com/Priyanshu2404/constellation-weaver",
-        tech: ["React", "Node.js", "MongoDB"],
-    },
-    {
-        title: "Hand Cricket Game",
-        description: "Fun browser-based cricket game with real-time score tracking.",
-        image: "projects/handcricket.png",
-        github: "https://github.com/Priyanshu2404/HAND-CRICKET",
-        tech: ["HTML", "CSS", "JavaScript"],
-    },
-    {
-        title: "Forecasting Financial Futures: A LSTM Framework for Stock Market Prediction",
-        description: "A hybrid deep learning framework mixing technical indicators with news sentiment analysis to predict stock trends.",
-        image: "projects/minorproject.png",
-        tech: ["Python", "TensorFlow", "LSTM", "FinBERT", "yfinance"],
-        code: "https://colab.research.google.com/drive/1OGJT0emTYXtReVqbzS4kYc7ZWgKy5wFl#scrollTo=pjgGwiTEsE2K",
-    }
+  {
+    index: '001',
+    codename: 'PORTFOLIO_WEBSITE',
+    description: 'Responsive portfolio built with React & Tailwind.',
+    stack: ['React', 'Tailwind', 'Vite'],
+    classification: 'PUBLIC',
+    linkLabel: 'GITHUB',
+    href: 'https://github.com/Priyanshu2404/PORTFOLIO',
+  },
+  {
+    index: '002',
+    codename: 'CONSTELLATION_WEAVER',
+    description: 'Explore constellations, create stories, interact with star maps.',
+    stack: ['React', 'Node.js', 'MongoDB'],
+    classification: 'PUBLIC',
+    linkLabel: 'GITHUB',
+    href: 'https://github.com/Priyanshu2404/constellation-weaver',
+  },
+  {
+    index: '003',
+    codename: 'HAND_CRICKET_ENGINE',
+    description: 'Browser-based cricket game with real-time score tracking.',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    classification: 'PUBLIC',
+    linkLabel: 'GITHUB',
+    href: 'https://github.com/Priyanshu2404/HAND-CRICKET',
+  },
+  {
+    index: '004',
+    codename: 'LSTM_STOCK_FORECASTING',
+    description: 'Hybrid deep learning framework: technical indicators + news sentiment for stock prediction.',
+    stack: ['Python', 'TensorFlow', 'LSTM', 'FinBERT', 'yfinance'],
+    classification: 'RESEARCH',
+    linkLabel: 'COLAB',
+    href: 'https://colab.research.google.com/drive/1OGJT0emTYXtReVqbzS4kYc7ZWgKy5wFl#scrollTo=pjgGwiTEsE2K',
+  },
 ];
 
-export default function Projects({ darkMode }) {
-    return (
-        <section
-            id="projects"
-            className={`py-20 px-6 min-h-screen transition-colors duration-500
-                ${darkMode ? 'bg-slate-950 text-white' : 'bg-gray-50 text-gray-900'}`}
-        >
-            <div className="max-w-6xl mx-auto text-center">
-                <h2 className="from-pink-500 via-purple-500 to-blue-500 bg-gradient-to-r bg-clip-text font-bold text-4xl text-transparent">
-                    PROJECTS
-                </h2>
+const rowVariants = {
+  hidden:  { opacity: 0, x: -12 },
+  visible: (i) => ({
+    opacity: 1, x: 0,
+    transition: { duration: 0.18, ease: 'linear', delay: i * 0.06 },
+  }),
+};
 
-                <div className="mt-20 grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {projects.map((project, index) => (
-                        <motion.a
-                            key={index}
-                            // Logic: Use project.code if it exists, otherwise use project.github
-                            href={project.code || project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className={`relative group overflow-hidden rounded-2xl shadow-lg border transition-all duration-300 cursor-pointer hover:scale-[1.03]
-                                ${darkMode
-                                    ? 'bg-slate-900/70 border-gray-700 backdrop-blur-md hover:shadow-pink-500/30'
-                                    : 'bg-white/80 border-gray-200 backdrop-blur-md hover:shadow-xl'}`}
-                        >
-                            <img
-                                src={project.image}
-                                alt={project.title}
-                                className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
-                            />
+export default function Projects() {
+  return (
+    <section
+      id="projects"
+      className="py-24 px-6 min-h-screen bg-terminal-surface"
+    >
+      <div className="max-w-6xl mx-auto space-y-8">
 
-                            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
-                                <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
-                                <p className="text-sm text-gray-300 mb-4">{project.description}</p>
+        {/* Section header */}
+        <div className="space-y-1">
+          <div className="text-xs2 text-smoke-400 tracking-widest uppercase">[02] SELECTED_WORKS.LOG</div>
+          <div className="flex items-center gap-3">
+            <h2 className="text-terminal-2xl font-mono font-bold text-smoke-100 tracking-wide">
+              SELECTED WORKS
+            </h2>
+            <span className="text-xs2 text-smoke-400 border border-terminal-border px-2 py-0.5">
+              {projects.length} RECORDS
+            </span>
+          </div>
+          <div className="terminal-hr w-full mt-2" />
+        </div>
 
-                                <div className="flex flex-wrap gap-2 mb-3">
-                                    {project.tech.map((tech, i) => (
-                                        <span key={i} className="text-xs bg-pink-500/20 text-pink-400 px-2 py-1 rounded-full border border-pink-500/30">
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
+        {/* Table header */}
+        <div className="hidden md:grid grid-cols-[60px_1fr_200px_120px_80px] gap-4 text-xs2 text-smoke-400 tracking-widest uppercase pb-2 border-b border-terminal-border">
+          <span>INDEX</span>
+          <span>CODENAME / DESCRIPTION</span>
+          <span>STACK</span>
+          <span>CLASS</span>
+          <span>LINK</span>
+        </div>
 
-                                {/* Dynamic Link Text */}
-                                <p className="text-sm text-blue-400 font-semibold group-hover:underline">
-                                    {project.code ? "View on Google Colab ↗" : "View on GitHub ↗"}
-                                </p>
-                            </div>
-                        </motion.a>
-                    ))}
+        {/* Rows */}
+        <div className="space-y-0">
+          {projects.map((proj, i) => (
+            <motion.a
+              key={proj.index}
+              href={proj.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              custom={i}
+              variants={rowVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="group block border-b border-terminal-border hover:border-phosphor hover:bg-phosphor/5 transition-colors duration-fast cursor-pointer"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-[60px_1fr_200px_120px_80px] gap-4 items-start py-4 px-2">
+                {/* Index */}
+                <span className="font-mono text-terminal-sm text-smoke-400 group-hover:text-phosphor transition-colors duration-fast">
+                  [{proj.index}]
+                </span>
+
+                {/* Codename + Description */}
+                <div className="space-y-1">
+                  <div className="font-mono text-terminal-base text-smoke-100 group-hover:text-phosphor group-hover:text-glow transition-colors duration-fast tracking-wider">
+                    {proj.codename}
+                  </div>
+                  <div className="font-mono text-xs2 text-smoke-300 leading-relaxed">
+                    {proj.description}
+                  </div>
                 </div>
-            </div>
-        </section>
-    );
+
+                {/* Stack tags */}
+                <div className="flex flex-wrap gap-1.5">
+                  {proj.stack.map((tech) => (
+                    <span key={tech} className="term-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Classification */}
+                <span className={`font-mono text-xs2 tracking-widest uppercase self-start mt-0.5
+                  ${proj.classification === 'RESEARCH' ? 'text-sys-warn' : 'text-sys-ok'}`}>
+                  {proj.classification}
+                </span>
+
+                {/* Link */}
+                <span className="font-mono text-xs2 text-smoke-400 group-hover:text-phosphor transition-colors duration-fast self-start mt-0.5 tracking-widest">
+                  [{proj.linkLabel}]&nbsp;↗
+                </span>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
 }

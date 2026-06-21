@@ -1,47 +1,116 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
-// 1. Accept darkMode as a prop
-export default function Resume({ darkMode }) {
-    return (
-        <motion.section
-            id="resume"
-            // 2. Updated: Dynamic background and text color transition
-            className={`py-20 px-6 flex justify-center items-center min-h-screen transition-colors duration-500
-                ${darkMode ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'}`}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-        >
-            <div className="max-w-8xl mx-auto text-center">
-                {/* Heading */}
-                <motion.h2
-                    className="from-pink-500 via-purple-500 to-blue-500 bg-gradient-to-r bg-clip-text font-bold text-4xl text-transparent"
-                    initial={{ opacity: 0, y: -30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-                    viewport={{ once: true }}
-                >
-                    RESUME
-                </motion.h2>
+export default function Resume() {
+  const ref    = useRef(null);
+  const inView = useInView(ref, { once: true });
 
-                {/* Resume Download/View Link */}
-                <motion.a
-                    href="https://drive.google.com/file/d/1KrmSFZ-l9o2uKFylqcZ6HxM5kXPIIQiA/view?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-                    viewport={{ once: true }}
+  return (
+    <section
+      id="resume"
+      ref={ref}
+      className="py-24 px-6 min-h-screen bg-terminal-black flex items-center"
+    >
+      <div className="max-w-2xl mx-auto w-full space-y-8">
+
+        {/* Section header */}
+        <div className="space-y-1">
+          <div className="text-xs2 text-smoke-400 tracking-widest uppercase">[05] RESUME.FETCH</div>
+          <h2 className="text-terminal-2xl font-mono font-bold text-smoke-100 tracking-wide">
+            RESUME
+          </h2>
+          <div className="terminal-hr w-full mt-2" />
+        </div>
+
+        {/* Terminal execution block */}
+        <div className="border border-terminal-border bg-terminal-surface">
+          {/* Chrome */}
+          <div className="flex items-center justify-between px-4 py-2 border-b border-terminal-border bg-terminal-panel">
+            <span className="text-xs2 text-smoke-400 uppercase tracking-widest">fetch_resume.sh</span>
+          </div>
+
+          <div className="p-6 space-y-3 font-mono text-terminal-sm">
+            {/* Command line */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.15, ease: 'linear', delay: 0 }}
+              className="text-smoke-200"
+            >
+              <span className="text-phosphor">$ </span>
+              EXECUTE: FETCH_RESUME --format=pdf --destination=browser
+            </motion.div>
+
+            {/* Fetching line */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.15, ease: 'linear', delay: 0.3 }}
+              className="text-smoke-400"
+            >
+              <span className="text-phosphor">&gt; </span>
+              FETCHING FROM SECURE STORAGE...
+            </motion.div>
+
+            {/* Progress bar */}
+            {inView && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.1, ease: 'linear', delay: 0.5 }}
+                className="space-y-1"
+              >
+                <div className="h-1.5 bg-terminal-muted w-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-phosphor shadow-phosphor-sm"
+                    initial={{ width: '0%' }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 1.2, ease: 'linear', delay: 0.6 }}
+                  />
+                </div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.15, ease: 'linear', delay: 1.8 }}
+                  className="text-phosphor text-glow"
                 >
-                    {/* 3. Button with hover and shadow effects */}
-                    <button className={`px-8 py-3 mt-20 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-pink-500 shadow-lg transition transform hover:scale-105 animate-pulse
-                        ${darkMode ? 'shadow-pink-500/40 hover:shadow-pink-500/80' : 'shadow-blue-500/30 hover:shadow-xl'}`}>
-                        VIEW MY RESUME
-                    </button>
-                </motion.a>
-            </div>
-        </motion.section>
-    );
+                  ████████████ 100% — TRANSFER COMPLETE
+                </motion.div>
+              </motion.div>
+            )}
+
+            {/* Ready line */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.15, ease: 'linear', delay: 2.0 }}
+              className="text-sys-ok"
+            >
+              <span className="text-phosphor">&gt; </span>
+              READY. OPENING FILE...
+            </motion.div>
+
+            {/* Download button */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.15, ease: 'linear', delay: 2.2 }}
+              className="pt-2"
+            >
+              <a
+                href="https://drive.google.com/file/d/1KrmSFZ-l9o2uKFylqcZ6HxM5kXPIIQiA/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="font-mono text-sm px-6 py-2.5 border border-phosphor text-phosphor hover:bg-phosphor hover:text-terminal-black transition-colors duration-fast tracking-widest uppercase shadow-phosphor-sm">
+                  [ ↓ DOWNLOAD RESUME.PDF ]
+                </button>
+              </a>
+            </motion.div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
 }
