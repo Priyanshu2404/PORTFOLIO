@@ -1,15 +1,22 @@
-import emailjs from '@emailjs/browser';
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp } from 'react-icons/fa';
 import { SiX } from 'react-icons/si';
+
+// ─── Web3Forms access key ──────────────────────────────────────────────────
+// Get yours FREE in 30 seconds:
+//   1. Go to https://web3forms.com
+//   2. Enter priyanshumishra2404@gmail.com
+//   3. Check your inbox for the access key
+//   4. Paste it below (replace YOUR_ACCESS_KEY_HERE)
+const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
 
 const SOCIAL_LINKS = [
   { Icon: FaLinkedin,  label: 'LinkedIn',  color: '#0A66C2', href: 'https://www.linkedin.com/in/priyanshu-mishra2404/' },
   { Icon: SiX,        label: 'X',         color: '#e8e8e8', href: 'https://x.com/Priyanshuuu2404' },
   { Icon: FaWhatsapp, label: 'WhatsApp',  color: '#25D366', href: 'https://wa.me/+919625769191' },
-  { Icon: FaInstagram,label: 'Instagram', color: '#E1306C', href: 'https://www.instagram.com/_priyanshuuu24' },
+  { Icon: FaInstagram,label: 'Instagram', color: '#E1306C', href: 'https://www.instagram.com/beingpriyanshu24' },
   { Icon: FaTelegram, label: 'Telegram',  color: '#26A5E4', href: 'https://t.me/Priyanshu2404PM' },
 ];
 
@@ -21,44 +28,49 @@ const fieldVariants = {
   }),
 };
 
-export default function Contact() {
-  const form = useRef();
+const toastStyle = (color) => ({
+  style: {
+    background: '#0d0d0d',
+    color,
+    border: '1px solid #1f1f1f',
+    fontFamily: 'JetBrains Mono, monospace',
+    fontSize: '0.75rem',
+    borderRadius: '0px',
+  },
+});
 
-  const sendemail = (e) => {
+export default function Contact() {
+  const form    = useRef();
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    emailjs.sendForm(
-      'service_x3l4lsd',
-      'template_cyu87jr',
-      form.current,
-      'J8yY0EbMs6lo4CP73'
-    ).then(
-      () => {
-        toast.success('TRANSMISSION SUCCESSFUL ✓', {
-          style: {
-            background: '#0d0d0d',
-            color: '#00ff41',
-            border: '1px solid #1f1f1f',
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '0.75rem',
-            borderRadius: '0px',
-          },
-        });
+    setSending(true);
+
+    const data = new FormData(form.current);
+    data.append('access_key', WEB3FORMS_KEY);
+    data.append('subject', `Portfolio message from ${data.get('user_name')}`);
+    data.append('from_name', 'Portfolio Contact Form');
+
+    try {
+      const res  = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data,
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        toast.success('TRANSMISSION SUCCESSFUL ✓', toastStyle('#00ff41'));
         form.current.reset();
-      },
-      (error) => {
-        toast.error('TRANSMISSION FAILED ✗', {
-          style: {
-            background: '#0d0d0d',
-            color: '#ff3333',
-            border: '1px solid #1f1f1f',
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '0.75rem',
-            borderRadius: '0px',
-          },
-        });
-        console.error('EmailJS error:', error);
+      } else {
+        throw new Error(json.message || 'Unknown error');
       }
-    );
+    } catch (err) {
+      console.error('Web3Forms error:', err);
+      toast.error('TRANSMISSION FAILED ✗ — ' + (err.message || 'check console'), toastStyle('#ff3333'));
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -115,7 +127,6 @@ export default function Contact() {
                       title={label}
                       className="group flex items-center justify-center w-9 h-9 border border-terminal-border text-smoke-400
                         hover:border-opacity-80 transition-all duration-fast"
-                      style={{ '--brand': color }}
                     >
                       <Icon
                         size={16}
@@ -128,7 +139,6 @@ export default function Contact() {
                   ))}
                 </div>
               </div>
-
             </div>
 
             {/* System status */}
@@ -139,7 +149,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sys-ok">●</span>
-                <span>ENCRYPTION: EMAILJS/TLS</span>
+                <span>ENCRYPTION: WEB3FORMS/TLS</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sys-warn">●</span>
@@ -156,7 +166,7 @@ export default function Contact() {
               <span className="text-xs2 text-sys-ok animate-flicker">● LIVE</span>
             </div>
 
-            <form ref={form} onSubmit={sendemail} className="p-5 space-y-4 font-mono text-terminal-sm">
+            <form ref={form} onSubmit={handleSubmit} className="p-5 space-y-4 font-mono text-terminal-sm">
               {/* OPERATOR_ID */}
               <motion.div
                 custom={0} variants={fieldVariants} initial="hidden"
@@ -221,9 +231,13 @@ export default function Contact() {
               >
                 <button
                   type="submit"
-                  className="w-full font-mono text-sm py-3 border border-phosphor text-phosphor hover:bg-phosphor hover:text-terminal-black transition-colors duration-fast tracking-widest uppercase shadow-phosphor-sm"
+                  disabled={sending}
+                  className="w-full font-mono text-sm py-3 border border-phosphor text-phosphor
+                    hover:bg-phosphor hover:text-terminal-black transition-colors duration-fast
+                    tracking-widest uppercase shadow-phosphor-sm
+                    disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  [ TRANSMIT ]
+                  {sending ? '[ TRANSMITTING... ]' : '[ TRANSMIT ]'}
                 </button>
               </motion.div>
             </form>
