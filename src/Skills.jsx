@@ -74,7 +74,7 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="py-24 px-6 min-h-screen bg-terminal-black relative overflow-hidden"
+      className="py-16 sm:py-24 px-4 sm:px-6 min-h-screen bg-terminal-black relative overflow-hidden"
     >
       {/* Grid background */}
       <div className="absolute inset-0 pointer-events-none" style={{

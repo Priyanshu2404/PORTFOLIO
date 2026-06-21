@@ -306,12 +306,13 @@ export default function LandingPage({ onEnter }) {
 
       {/* ── Bottom meta ──────────────────────────────────────────────── */}
       <motion.div
-        className="absolute bottom-8 left-0 right-0 flex justify-between px-10 font-mono text-xs2 text-smoke-500 tracking-widest"
+        className="absolute bottom-8 left-0 right-0 flex justify-between px-6 sm:px-10 font-mono text-xs2 text-smoke-500 tracking-widest"
         initial={{ opacity: 0 }}
         animate={{ opacity: booted ? 1 : 0 }}
         transition={{ duration: 0.3, ease: 'linear', delay: 0.5 }}
       >
-        <span>CTRL+K — COMMAND PALETTE</span>
+        <span className="hidden sm:block">CTRL+K — COMMAND PALETTE</span>
+        <span className="sm:hidden">TAP ENTER ↓</span>
         <span className="hidden sm:block">PRIYANSHU_MISHRA.DEV — 2026</span>
         <span>↓ SCROLL</span>
       </motion.div>

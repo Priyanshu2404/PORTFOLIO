@@ -51,7 +51,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 px-6 min-h-screen bg-terminal-surface"
+      className="py-16 sm:py-24 px-4 sm:px-6 min-h-screen bg-terminal-surface"
     >
       <div className="max-w-6xl mx-auto space-y-8">
 
@@ -93,7 +93,7 @@ export default function Projects() {
               viewport={{ once: true }}
               className="group block border-b border-terminal-border hover:border-phosphor hover:bg-phosphor/5 transition-colors duration-fast cursor-pointer"
             >
-              <div className="grid grid-cols-1 md:grid-cols-[60px_1fr_200px_120px_80px] gap-4 items-start py-4 px-2">
+              <div className="grid grid-cols-1 md:grid-cols-[60px_1fr_200px_120px_80px] gap-3 md:gap-4 items-start py-4 px-2">
                 {/* Index */}
                 <span className="font-mono text-terminal-sm text-smoke-400 group-hover:text-phosphor transition-colors duration-fast">
                   [{proj.index}]
@@ -118,16 +118,16 @@ export default function Projects() {
                   ))}
                 </div>
 
-                {/* Classification */}
-                <span className={`font-mono text-xs2 tracking-widest uppercase self-start mt-0.5
-                  ${proj.classification === 'RESEARCH' ? 'text-sys-warn' : 'text-sys-ok'}`}>
-                  {proj.classification}
-                </span>
-
-                {/* Link */}
-                <span className="font-mono text-xs2 text-smoke-400 group-hover:text-phosphor transition-colors duration-fast self-start mt-0.5 tracking-widest">
-                  [{proj.linkLabel}]&nbsp;↗
-                </span>
+                {/* Classification + Link — on mobile show inline */}
+                <div className="flex items-center gap-4 md:contents">
+                  <span className={`font-mono text-xs2 tracking-widest uppercase
+                    ${proj.classification === 'RESEARCH' ? 'text-sys-warn' : 'text-sys-ok'}`}>
+                    {proj.classification}
+                  </span>
+                  <span className="font-mono text-xs2 text-smoke-400 group-hover:text-phosphor transition-colors duration-fast tracking-widest">
+                    [{proj.linkLabel}]&nbsp;↗
+                  </span>
+                </div>
               </div>
             </motion.a>
           ))}

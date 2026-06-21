@@ -39,7 +39,7 @@ export default function CertificationsSection() {
   return (
     <section
       id="certifications"
-      className="py-24 px-6 min-h-screen bg-terminal-panel"
+      className="py-16 sm:py-24 px-4 sm:px-6 min-h-screen bg-terminal-panel"
     >
       <div className="max-w-5xl mx-auto space-y-8">
 
@@ -70,23 +70,23 @@ export default function CertificationsSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.15, ease: 'linear', delay: i * 0.07 }}
-              className="group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-4 py-3.5 border-b border-terminal-border last:border-0 hover:bg-phosphor/5 hover:border-l-2 hover:border-l-phosphor transition-all duration-fast cursor-pointer"
+              className="group flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-4 px-4 py-3.5 border-b border-terminal-border last:border-0 hover:bg-phosphor/5 hover:border-l-2 hover:border-l-phosphor transition-all duration-fast cursor-pointer"
             >
-              {/* Date */}
-              <span className="font-mono text-xs2 text-smoke-400 shrink-0 tabular-nums">
-                [{cert.date}]
-              </span>
-
-              {/* Tag */}
-              <span className="term-tag shrink-0">CERT</span>
+              {/* Date + tag on mobile: same row */}
+              <div className="flex items-center gap-3 sm:contents">
+                <span className="font-mono text-xs2 text-smoke-400 shrink-0 tabular-nums">
+                  [{cert.date}]
+                </span>
+                <span className="term-tag shrink-0">CERT</span>
+              </div>
 
               {/* Title */}
-              <span className="font-mono text-terminal-sm text-smoke-100 group-hover:text-phosphor group-hover:text-glow transition-colors duration-fast flex-1 min-w-0 truncate">
+              <span className="font-mono text-terminal-sm text-smoke-100 group-hover:text-phosphor group-hover:text-glow transition-colors duration-fast flex-1 min-w-0">
                 {cert.title}
               </span>
 
-              {/* Issuer */}
-              <span className="font-mono text-xs2 text-smoke-300 shrink-0 hidden sm:block">
+              {/* Issuer — visible on all screens */}
+              <span className="font-mono text-xs2 text-smoke-300 shrink-0">
                 — {cert.issuer}
               </span>
 

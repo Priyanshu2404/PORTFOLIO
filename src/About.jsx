@@ -32,7 +32,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full min-h-screen flex items-center justify-center px-6 overflow-hidden bg-terminal-black"
+      className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden bg-terminal-black"
     >
       {/* ── Layer 1: Matrix rain canvas (very subtle, behind everything) ── */}
       <MatrixRain opacity={0.12} speed={60} />
@@ -63,18 +63,18 @@ export default function About() {
       <div className="absolute inset-4 pointer-events-none corner-brackets" />
 
       {/* ── Corner labels ── */}
-      <div className="absolute top-10 left-8 text-xs2 text-smoke-400 font-mono tracking-widest uppercase select-none z-10">
+      <div className="absolute top-10 left-8 text-xs2 text-smoke-400 font-mono tracking-widest uppercase select-none z-10 hidden sm:block">
         [01] OPERATOR_PROFILE
       </div>
-      <div className="absolute top-10 right-8 text-xs2 text-smoke-400 font-mono tracking-widest select-none z-10">
+      <div className="absolute top-10 right-8 text-xs2 text-smoke-400 font-mono tracking-widest select-none z-10 hidden sm:block">
         SYS/INIT
       </div>
 
       {/* ── Decorative hex coords (bottom corners) ── */}
-      <div className="absolute bottom-6 left-8 text-xs2 text-smoke-500 font-mono select-none z-10">
+      <div className="absolute bottom-6 left-8 text-xs2 text-smoke-500 font-mono select-none z-10 hidden sm:block">
         0x{Math.floor(Date.now() / 1000).toString(16).toUpperCase()}
       </div>
-      <div className="absolute bottom-6 right-8 text-xs2 text-smoke-500 font-mono select-none z-10">
+      <div className="absolute bottom-6 right-8 text-xs2 text-smoke-500 font-mono select-none z-10 hidden sm:block">
         NODE: PRIYANSHU_DEV_01
       </div>
 

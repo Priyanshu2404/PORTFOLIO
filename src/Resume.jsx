@@ -9,7 +9,7 @@ export default function Resume() {
     <section
       id="resume"
       ref={ref}
-      className="py-24 px-6 min-h-screen bg-terminal-black flex items-center"
+      className="py-16 sm:py-24 px-4 sm:px-6 min-h-screen bg-terminal-black flex items-center"
     >
       <div className="max-w-2xl mx-auto w-full space-y-8">
 
@@ -35,7 +35,7 @@ export default function Resume() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.15, ease: 'linear', delay: 0 }}
-              className="text-smoke-200"
+              className="text-smoke-200 break-all"
             >
               <span className="text-phosphor">$ </span>
               EXECUTE: FETCH_RESUME --format=pdf --destination=browser
@@ -101,8 +101,9 @@ export default function Resume() {
                 href="https://drive.google.com/file/d/1KrmSFZ-l9o2uKFylqcZ6HxM5kXPIIQiA/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="block"
               >
-                <button className="font-mono text-sm px-6 py-2.5 border border-phosphor text-phosphor hover:bg-phosphor hover:text-terminal-black transition-colors duration-fast tracking-widest uppercase shadow-phosphor-sm">
+                <button className="w-full sm:w-auto font-mono text-sm px-6 py-2.5 border border-phosphor text-phosphor hover:bg-phosphor hover:text-terminal-black transition-colors duration-fast tracking-widest uppercase shadow-phosphor-sm">
                   [ ↓ DOWNLOAD RESUME.PDF ]
                 </button>
               </a>

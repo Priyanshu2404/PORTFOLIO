@@ -56,7 +56,7 @@ export default function Contact() {
             borderRadius: '0px',
           },
         });
-        console.error(error.text);
+        console.error('EmailJS error:', error);
       }
     );
   };
@@ -64,7 +64,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 px-6 min-h-screen bg-terminal-surface"
+      className="py-16 sm:py-24 px-4 sm:px-6 min-h-screen bg-terminal-surface"
     >
       <Toaster position="top-center" reverseOrder={false} />
 
@@ -79,7 +79,7 @@ export default function Contact() {
           <div className="terminal-hr w-full mt-2" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
 
           {/* LEFT — status info */}
           <motion.div
@@ -98,7 +98,7 @@ export default function Contact() {
                 <div className="text-smoke-400 text-xs2 uppercase tracking-wider mb-1">EMAIL</div>
                 <a
                   href="mailto:priyanshumishra2404@gmail.com"
-                  className="text-phosphor hover:text-glow transition-colors duration-fast"
+                  className="text-phosphor hover:text-glow transition-colors duration-fast break-all"
                 >
                   priyanshumishra2404@gmail.com
                 </a>

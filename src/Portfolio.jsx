@@ -31,14 +31,28 @@ const Portfolio = () => {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  // Scroll-to-enter: if user scrolls down on the landing page, enter automatically
+  // Scroll-to-enter: mouse wheel OR touch swipe-up on mobile
   useEffect(() => {
     if (entered) return;
-    const handler = (e) => {
+    const handleWheel = (e) => {
       if (e.deltaY > 30) setEntered(true);
     };
-    window.addEventListener('wheel', handler, { passive: true });
-    return () => window.removeEventListener('wheel', handler);
+    let touchStartY = 0;
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    const handleTouchEnd = (e) => {
+      const delta = touchStartY - e.changedTouches[0].clientY;
+      if (delta > 40) setEntered(true); // swipe up = positive delta
+    };
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
   }, [entered]);
 
   return (

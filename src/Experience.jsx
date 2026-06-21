@@ -206,9 +206,9 @@ function ExperienceCard({ exp, index }) {
       {/* ── Bottom status bar ──────────────────────────────────────────── */}
       <div className="flex items-center justify-between px-5 py-2 border-t border-terminal-border bg-terminal-panel/60">
         <span className="font-mono text-xs2 text-smoke-500 tracking-widest">
-          PROC: {exp.index} / {EXPERIENCES.length} — {exp.bullets.length} LOG LINES
+          PROC: {exp.index} / {EXPERIENCES.length}
         </span>
-        <span className="font-mono text-xs2 text-smoke-500 tracking-widest">
+        <span className="font-mono text-xs2 text-smoke-500 tracking-widest hidden sm:block">
           {exp.dateStart.replace('.', '-')} → {exp.dateEnd.replace('.', '-')}
         </span>
       </div>
@@ -224,7 +224,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="py-24 px-6 min-h-screen bg-terminal-panel relative overflow-hidden"
+      className="py-16 sm:py-24 px-4 sm:px-6 min-h-screen bg-terminal-panel relative overflow-hidden"
     >
       {/* Grid background */}
       <div

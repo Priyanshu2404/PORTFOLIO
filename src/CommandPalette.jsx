@@ -79,7 +79,7 @@ export default function CommandPalette({ isOpen, onClose }) {
 
           {/* Palette window */}
           <motion.div
-            className="fixed top-[15vh] left-1/2 z-[101] w-full max-w-2xl -translate-x-1/2 border border-phosphor shadow-phosphor bg-terminal-black"
+            className="fixed top-[10vh] sm:top-[15vh] left-1/2 z-[101] w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2 border border-phosphor shadow-phosphor bg-terminal-black"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
